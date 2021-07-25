@@ -8,7 +8,12 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFind
     .then(result => { console.log('connected to MongoDB') }).catch((error) => { console.log('error connecting to MongoDB:', error.message) })
 
 const personSchema = new mongoose.Schema({
-    name: { type: String, required: true, unique: true, minLength: 3 },
+    name: {
+        type: String,
+        required: true,
+        unique: true,
+        minLength: 3
+    },
     number: { type: String, minLength: 8 },
 })
 // Apply the uniqueValidator plugin to personSchema.

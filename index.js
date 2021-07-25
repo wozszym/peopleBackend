@@ -104,7 +104,12 @@ app.put('/api/persons/:id', (request, response, next) => {
     }
 
     // runValidators: true -> potential source of error. Update validators are off by default - you need to specify the runValidators option.
-    Person.findByIdAndUpdate(request.params.id, person, { new: true, runValidators: true })
+    Person.findByIdAndUpdate(request.params.id, person,
+        {
+            new: true,
+            runValidators: true,
+            context: 'query' // https://stackoverflow.com/questions/65117701/after-adding-runvalidators-true-my-mongoose-update-function-is-erroring-with
+        })
         .then(updatedNote => {
             response.json(updatedNote)
         })
